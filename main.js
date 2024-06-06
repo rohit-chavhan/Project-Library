@@ -21,6 +21,26 @@ Book.prototype.changeStatus = function() {
 
 const myLibrary = [];
 
+dialog.addEventListener("click", (event) => {
+  if(event.target.id === "form") {
+    dialog.close();
+  }
+})
+
+addBooksBtn.addEventListener('click', () => {
+  dialog.showModal();
+});
+
+submitBtn.addEventListener('click', (event) => {
+  getValues();
+  if(myLibrary.length > 1 ) {
+    removeCards();
+  }
+  createCards();
+  dialog.close();
+  event.preventDefault();
+});
+
 function getValues() {
   const bookName = document.getElementById('bookName').value;
   const numsOfPages = document.getElementById('numsOfPages').value;
@@ -67,6 +87,7 @@ function createCards() {
     bookN.innerHTML = `${el.bookName}`;
     bookP.innerHTML = `${el.pages}`;
     status.innerHTML = `${el.status}`;
+
     status.classList.add('btn');
     removeBtn.classList.add('btn');
     removeBtn.classList.add('width100');
@@ -99,36 +120,6 @@ function createCards() {
   })
 }
 
-function openForms() {
-  dialog.showModal();
-}
-
 function removeCards() {
   cardsMainDiv.textContent = "";
 }
-
-function submitButton(event) {
-  getValues();
-  if(myLibrary.length > 1 ) {
-    removeCards();
-  }
-  createCards();
-  dialog.close();
-  event.preventDefault();
-}
-
-dialog.addEventListener("click", e => {
-  const dialogDimensions = dialog.getBoundingClientRect();
-  if (
-    e.clientX < dialogDimensions.left ||
-    e.clientX > dialogDimensions.right ||
-    e.clientY < dialogDimensions.top ||
-    e.clientY > dialogDimensions.bottom
-  ) {
-    dialog.close();
-  }
-})
-
-addBooksBtn.addEventListener('click', openForms);
-
-submitBtn.addEventListener('click', submitButton);

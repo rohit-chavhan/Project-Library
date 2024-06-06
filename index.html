@@ -21,25 +21,26 @@
         <button class="addBooks btn">+ Add books</button>
     </div>
     
-        <dialog>
+        <dialog id="form">
            <form method="dialog">
                <label for="bookName">Book Name</label>
-               <input type="text" name="bookName" id="bookName">
+               <input type="text" name="bookName" id="bookName" maxlength="100" required>
 
                <label for="numsOfPages">Pages</label>
-               <input  name="numsOfPages" id="numsOfPages">
+               <input  name="numsOfPages" id="numsOfPages" required max="1000">
 
                <label for="author">Author</label>
-               <input required type="text" name="author" id="author">
+               <input required type="text" name="author" id="author" maxlength="100" required>
 
                <div class="checkox-sent">
                    <label for="status">Have you read it ?</label>
-                   <input type="checkbox" name="status" id="status" value="Read">
+                   <input type="checkbox" name="status" id="status" required>
                </div>
 
-               <button formmethod="dialog" class="submit btn"> Submit </button>    
+               <button formmethod="dialog" class="submit btn green-btn"> Submit </button>    
            </form>
         </dialog> 
     <div class="gridCards"></div>
+    <footer>Copyright © 2024 @rohit-chavhan</footer>
 </body>
 </html>
