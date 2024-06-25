@@ -3,29 +3,29 @@ let submitBtn = document.querySelector('.submit');
 const cardsMainDiv = document.querySelector('.gridCards');
 const dialog = document.querySelector('dialog');
 
-function Book(bookName, author, pages, status) {
-  this.bookName = bookName;
-  this.author = author;
-  this.pages = pages;
-  this.status = status;
-}
-
-Book.prototype.changeStatus = function() {
-  if(this.status === "Read") {
-    this.status = "Not Read";
+class Book {
+  constructor(bookName, author, pages, status) {
+    this.bookName = bookName;
+    this.author = author;
+    this.pages = pages;
+    this.status = status;
   }
-  else {
-    this.status = "Read";
+  changeStatus() {
+    if (this.status === 'Read') {
+      this.status = 'Not Read';
+    } else {
+      this.status = 'Read';
+    }
   }
 }
 
 const myLibrary = [];
 
-dialog.addEventListener("click", (event) => {
-  if(event.target.id === "form") {
+dialog.addEventListener('click', (event) => {
+  if (event.target.id === 'form') {
     dialog.close();
   }
-})
+});
 
 addBooksBtn.addEventListener('click', () => {
   dialog.showModal();
@@ -33,7 +33,7 @@ addBooksBtn.addEventListener('click', () => {
 
 submitBtn.addEventListener('click', (event) => {
   getValues();
-  if(myLibrary.length > 1 ) {
+  if (myLibrary.length > 1) {
     removeCards();
   }
   createCards();
@@ -48,11 +48,10 @@ function getValues() {
   const status = document.getElementById('status');
 
   let readOrNot = '';
-  if(status.checked === true) {
-    readOrNot = "Read";
-  }
-  else {
-    readOrNot = "Not read"
+  if (status.checked === true) {
+    readOrNot = 'Read';
+  } else {
+    readOrNot = 'Not read';
   }
 
   const book = new Book(bookName, author, numsOfPages, readOrNot);
@@ -60,14 +59,14 @@ function getValues() {
 }
 
 function getAttribute(elm) {
-  const arrayIndex = Number(elm.getAttribute("index"));
+  const arrayIndex = Number(elm.getAttribute('index'));
   myLibrary[arrayIndex].changeStatus();
   removeCards();
   createCards();
 }
 
 function removeArrayElm(elm) {
-  const index = Number(elm.getAttribute("removeIndex"));
+  const index = Number(elm.getAttribute('removeIndex'));
   myLibrary.splice(index, 1);
   removeCards();
   createCards();
@@ -76,13 +75,13 @@ function removeArrayElm(elm) {
 function createCards() {
   myLibrary.forEach((el, i) => {
     const div = document.createElement('div');
-    const bookN = document.createElement("p");
-    const bookP = document.createElement("p");
-    const authorN = document.createElement("p");
-    const status = document.createElement("button");
-    const removeBtn = document.createElement("button");
+    const bookN = document.createElement('p');
+    const bookP = document.createElement('p');
+    const authorN = document.createElement('p');
+    const status = document.createElement('button');
+    const removeBtn = document.createElement('button');
 
-    removeBtn.textContent = "Remove book";
+    removeBtn.textContent = 'Remove book';
     authorN.innerHTML = `"${el.author}"`;
     bookN.innerHTML = `${el.bookName}`;
     bookP.innerHTML = `${el.pages}`;
@@ -91,23 +90,22 @@ function createCards() {
     status.classList.add('btn');
     removeBtn.classList.add('btn');
     removeBtn.classList.add('width100');
-    if(status.innerHTML === "Read") {
+    if (status.innerHTML === 'Read') {
       status.classList.add('green-btn');
-    }
-    else {
+    } else {
       status.classList.add('red-btn');
     }
 
-    status.setAttribute("index", `${i}`);
+    status.setAttribute('index', `${i}`);
     removeBtn.setAttribute('removeIndex', `${i}`);
 
-    status.addEventListener('click', function() {
+    status.addEventListener('click', function () {
       getAttribute(this);
-    })
+    });
 
-    removeBtn.addEventListener('click', function() {
+    removeBtn.addEventListener('click', function () {
       removeArrayElm(this);
-    })
+    });
 
     div.appendChild(authorN);
     div.appendChild(bookN);
@@ -115,11 +113,11 @@ function createCards() {
     div.appendChild(status);
     div.classList.add('cards');
     div.appendChild(removeBtn);
-    
+
     cardsMainDiv.appendChild(div);
-  })
+  });
 }
 
 function removeCards() {
-  cardsMainDiv.textContent = "";
+  cardsMainDiv.textContent = '';
 }
