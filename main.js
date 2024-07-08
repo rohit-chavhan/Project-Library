@@ -95,11 +95,11 @@ function createCards() {
     status.setAttribute('index', `${i}`);
     removeBtn.setAttribute('removeIndex', `${i}`);
 
-    status.addEventListener('click', function () {
+    status.addEventListener('click', () => {
       getAttribute(this);
     });
 
-    removeBtn.addEventListener('click', function () {
+    removeBtn.addEventListener('click', () => {
       removeArrayElm(this);
     });
 
@@ -109,6 +109,4 @@ function createCards() {
   });
 }
 
-function removeCards() {
-  cardsMainDiv.textContent = '';
-}
+const removeCards = () => (cardsMainDiv.textContent = '');
