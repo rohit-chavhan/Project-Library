@@ -33,14 +33,23 @@ addBooksBtn.addEventListener('click', () => {
   dialog.showModal();
 });
 
+function formReset() {
+  document.getElementById('bookName').value = '';
+  document.getElementById('numsOfPages').value = '';
+  document.getElementById('author').value = '';
+  document.getElementById('status').checked = false;
+}
+
 // Submit Button Event Listener
 form.addEventListener('submit', (event) => {
   event.preventDefault();
+
   getValues();
   if (myLibrary.length > 1) {
     removeCards();
   }
   createCards();
+  formReset();
   dialog.close();
 });
 
