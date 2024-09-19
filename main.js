@@ -3,6 +3,7 @@ let addBooksBtn = document.querySelector('.addBooks');
 let submitBtn = document.querySelector('.submit');
 const cardsMainDiv = document.querySelector('.gridCards');
 const dialog = document.querySelector('dialog');
+const form = document.getElementById('form');
 
 // Book Class
 class Book {
@@ -33,14 +34,14 @@ addBooksBtn.addEventListener('click', () => {
 });
 
 // Submit Button Event Listener
-submitBtn.addEventListener('click', (event) => {
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
   getValues();
   if (myLibrary.length > 1) {
     removeCards();
   }
   createCards();
   dialog.close();
-  event.preventDefault();
 });
 
 // Function to Add Book to Library

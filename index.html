@@ -20,10 +20,11 @@
     <div class="addButtonDiv">
       <button class="addBooks btn">+ Add books</button>
     </div>
-
+    <!-- add validation to that form! Don’t let your users submit without filling in all the fields!  -->
     <dialog id="form">
-      <form method="dialog">
+      <form id="form" method="dialog">
         <label for="bookName">Book Name</label>
+        <span>all fields are required</span>
         <input
           type="text"
           name="bookName"
@@ -33,7 +34,13 @@
         />
 
         <label for="numsOfPages">Pages</label>
-        <input name="numsOfPages" id="numsOfPages" required max="1000" />
+        <input
+          type="number"
+          name="numsOfPages"
+          id="numsOfPages"
+          max="1000"
+          required
+        />
 
         <label for="author">Author</label>
         <input
@@ -47,10 +54,12 @@
 
         <div class="checkox-sent">
           <label for="status">Have you read it ?</label>
-          <input type="checkbox" name="status" id="status" required />
+          <input type="checkbox" name="status" id="status" />
         </div>
 
-        <button formmethod="dialog" class="submit btn green-btn">Submit</button>
+        <button formmethod="dialog" type="submit" class="submit btn green-btn">
+          Submit
+        </button>
       </form>
     </dialog>
     <div class="gridCards"></div>
