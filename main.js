@@ -51,7 +51,7 @@ function getValues() {
   const status = document.getElementById('status').checked
     ? 'Read'
     : 'Not read';
-
+  console.log(status);
   const book = new Book(bookName, author, numsOfPages, status);
   myLibrary.push(book);
 }
@@ -63,6 +63,7 @@ function domInAction() {
 
 function getAttribute(elm) {
   const arrayIndex = Number(elm.getAttribute('index'));
+  console.log(elm, arrayIndex);
   myLibrary[arrayIndex].toggleStatus();
   domInAction();
 }
@@ -72,6 +73,8 @@ function removeArrayElm(elm) {
   myLibrary.splice(index, 1);
   domInAction();
 }
+
+const removeCards = () => (cardsMainDiv.textContent = '');
 
 function createCards() {
   myLibrary.forEach((el, i) => {
@@ -96,11 +99,11 @@ function createCards() {
     removeBtn.setAttribute('removeIndex', `${i}`);
 
     status.addEventListener('click', () => {
-      getAttribute(this);
+      getAttribute(status);
     });
 
     removeBtn.addEventListener('click', () => {
-      removeArrayElm(this);
+      removeArrayElm(removeBtn);
     });
 
     div.classList.add('cards');
@@ -108,5 +111,3 @@ function createCards() {
     cardsMainDiv.appendChild(div);
   });
 }
-
-const removeCards = () => (cardsMainDiv.textContent = '');
